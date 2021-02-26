@@ -1,31 +1,38 @@
 package com.m3.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.SecondaryTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "map")
-@SecondaryTable(name = "category", pkJoinColumns = @PrimaryKeyJoinColumn(name = "map_id"))
+//@SecondaryTable(name = "category", pkJoinColumns = @PrimaryKeyJoinColumn(name = "map_id"))
 public class MarketMap {
 	
 	//@Column(name="id")
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
 	@Column(name="name")
 	private String name;
-	
-	@Column(table="category", name="category_name")
-	private String categoryName;
 
-	public MarketMap(long id, String name, String categoryName) {
-		this.id = id;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="map_id")
+//    private List<Category> category;
+  private List<Category> category = new ArrayList<Category>();
+    
+	public MarketMap(String name) {
 		this.name = name;
-		this.categoryName = categoryName;
 	}
 	
 	public MarketMap() {
@@ -47,15 +54,15 @@ public class MarketMap {
 		this.name = name;
 	}
 
-	public String getCategoryName() {
-		return categoryName;
+	public List<Category> getCategories() {
+		return category;
 	}
 
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
+	public void setCategories(List<Category> categories) {
+		this.category = categories;
 	}
-	
+
 	public String toString() {
-		return String.format("Map[ id: %d, name: %s, category:%s", this.id, this.name, this.categoryName);
+		return String.format("Map[ id: %d, name: %s]", this.id, this.name);
 	}
 }

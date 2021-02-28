@@ -25,7 +25,8 @@ public class Category {
 	@Column(name="name")
 	private String name;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+//	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "map_id"), name = "map_id")
     private MarketMap map;
 	

@@ -15,10 +15,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "map")
-//@SecondaryTable(name = "category", pkJoinColumns = @PrimaryKeyJoinColumn(name = "map_id"))
 public class MarketMap {
 	
-	//@Column(name="id")
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
@@ -26,10 +24,8 @@ public class MarketMap {
 	@Column(name="name")
 	private String name;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="map_id")
+//    @OneToMany(mappedBy = "map", cascade = CascadeType.ALL, orphanRemoval = true)
 //    private List<Category> category;
-  private List<Category> category = new ArrayList<Category>();
     
 	public MarketMap(String name) {
 		this.name = name;
@@ -54,15 +50,18 @@ public class MarketMap {
 		this.name = name;
 	}
 
-	public List<Category> getCategories() {
-		return category;
-	}
-
-	public void setCategories(List<Category> categories) {
-		this.category = categories;
-	}
+//	public List<Category> getCategory() {
+//		return category;
+//	}
+//
+//	public void setCategory(List<Category> category) {
+//		this.category = category;
+//	}
 
 	public String toString() {
+		
+//		return String.format("Map[ id: %d, name: %s, categories: %s]", this.id, this.name, this.category.toString());
 		return String.format("Map[ id: %d, name: %s]", this.id, this.name);
+
 	}
 }

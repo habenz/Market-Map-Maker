@@ -2,7 +2,6 @@ package com.m3.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,13 +18,9 @@ public class Category {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	
-//	@Column(name="map_id")
-//	private long mapId;
-	
 	@Column(name="name")
 	private String name;
 	
-//	@ManyToOne(fetch = FetchType.LAZY)
 	@ManyToOne
     @JoinColumn(foreignKey = @ForeignKey(name = "map_id"), name = "map_id")
     private MarketMap map;

@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.m3.entity.Category;
+import com.m3.entity.Company;
 import com.m3.entity.MarketMap;
 import com.m3.repository.CategoryRepository;
+import com.m3.repository.CompanyRepository;
 import com.m3.repository.MapRepository;
 
 @RestController
@@ -29,6 +31,9 @@ public class MapController {
 	
 	@Autowired
 	private CategoryRepository categoryRepository;
+	
+	@Autowired
+	private CompanyRepository companyRepository;
 	
 	@GetMapping("/all")
 	public List<MarketMap> getAllMaps() {
@@ -82,10 +87,14 @@ public class MapController {
 		// There's definitely a way to do this by cascading changes
 		// need to throw if map is null
 		MarketMap savedMap = this.mapRepository.findById(mapId).orElse(null);
+		
 		List<Category> categoriesToDelete =  categoryRepository.findByMap_Id(mapId);
 		for(Category category: categoriesToDelete) {
-			this.categoryRepository.delete(category);
+			List<Company> childrenToDelete = this.companyRepository.findByCategory_Id(category.getId());
+			this.companyRepository.deleteAll(childrenToDelete);
 		}
+		this.categoryRepository.deleteAll(categoriesToDelete);
+		
 		this.mapRepository.deleteById(mapId);
 		return savedMap;
 	}

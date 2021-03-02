@@ -68,9 +68,12 @@ public class CategoryController {
 			return this.categoryRepository.save(savedCategory);
 		}
 		
-//		@DeleteMapping("/remove/{categoryId}")
-//		public Category deleteCategory(@PathVariable Long categoryId) {
-//			Category savedCategory = this.categoryRepository.findById(categoryId).get();
-//			for ()
-//		}
+		@DeleteMapping("/remove/{categoryId}")
+		public Category deleteCategory(@PathVariable Long categoryId) {
+			Category savedCategory = this.categoryRepository.findById(categoryId).get();
+			List<Company> childrenToDelete = this.companyRepository.findByCategory_Id(categoryId);
+			this.companyRepository.deleteAll(childrenToDelete);
+			this.categoryRepository.delete(savedCategory);
+			return savedCategory;
+		}
 }

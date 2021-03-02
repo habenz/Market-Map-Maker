@@ -28,10 +28,15 @@ public class CompanyController {
 		return this.companyRepository.findAll();
 	}
 	
-	@GetMapping("/test/{companyId}")
-	public Company filledOutCompany(@PathVariable Long companyId) {
-		Company savedCompany = this.companyRepository.findById(companyId).orElse(null);
-		companyService.testAPI();
-		return null;
+	@GetMapping("/test/")
+	public void test() {
+		companyService.testCrunchbaseAPI();
 	}
+
+//	@GetMapping("/test/{companyId}")
+//	public Company filledOutCompany(@PathVariable Long companyId) {
+//		Company savedCompany = this.companyRepository.findById(companyId).orElse(null);
+//		companyService.testCrunchbaseAPI();
+//		return null;
+//	}
 }

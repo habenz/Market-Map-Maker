@@ -28,7 +28,7 @@ public class CompanyController {
 		return this.companyRepository.findAll();
 	}
 	
-	@GetMapping("/test/")
+	@GetMapping("/test")
 	public void test() {
 		companyService.testCrunchbaseAPI();
 	}

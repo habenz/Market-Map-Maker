@@ -38,6 +38,7 @@ public class CompanyService {
         response = restTemplate.getForObject(url, CrunchbaseSearchResponse.class);
         
         System.out.println(response);
+        System.out.println(response.getData().getPaging().getTotal_items());
 	}
 
 

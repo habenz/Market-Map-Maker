@@ -7,6 +7,8 @@ import AddToPhotosIcon from '@material-ui/icons/AddToPhotos';
 
 import m3Service from '../API/m3Service.js';
 
+import './Page.css';
+
 const Home = () => {
 	const [maps, setMaps] = useState([]);
 
@@ -15,7 +17,7 @@ const Home = () => {
 	},[]);
 
 	return(
-		<div >
+		<div className="page">
 			<Link to="/new">
 				<Button
 				variant="contained"
@@ -26,7 +28,7 @@ const Home = () => {
 				New Market Map
 				</Button>
 			</Link>
-			
+
 			{maps.map(map => {
 				return(
 					<Typography variant="h6">

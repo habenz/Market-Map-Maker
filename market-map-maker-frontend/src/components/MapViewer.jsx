@@ -11,6 +11,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
+import './Page.css';
 
 const MapViewer = (props) => {
 	const match = useRouteMatch('/view/:mapId').params.mapId;
@@ -28,7 +29,7 @@ const MapViewer = (props) => {
 	},[]);
 
 	return(
-		<div >
+		<div className="page">
 			<Typography variant="h5" >
 				{map.name}
 			</Typography>

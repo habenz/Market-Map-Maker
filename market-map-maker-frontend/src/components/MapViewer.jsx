@@ -10,6 +10,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+import EditIcon from '@material-ui/icons/Edit';
 
 import './Page.css';
 
@@ -17,7 +19,6 @@ const MapViewer = (props) => {
 	const match = useRouteMatch('/view/:mapId').params.mapId;
 	const [map, setMap] = useState({
 		name: " ",
-		x: "hi",
 		categories: []
 	});
 
@@ -65,6 +66,17 @@ const MapViewer = (props) => {
 				    </>
 				)
 			})}
+			<Link to={`/edit/${match}`}>
+				<Button
+				variant="contained"
+				color="primary"
+				size="large"
+				startIcon={<EditIcon />}
+				>
+				Edit
+				</Button>
+			</Link>
+
 		</div>
 		);
 }

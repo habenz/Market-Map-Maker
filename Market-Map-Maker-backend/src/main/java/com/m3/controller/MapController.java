@@ -76,11 +76,11 @@ public class MapController {
 	}
 	
 	@PatchMapping("/rename/{mapId}")
-	public MarketMap renameMap(@PathVariable Long mapId, @RequestBody String newName) {
+	public MarketMap renameMap(@PathVariable Long mapId, @RequestBody NameData newName) {
 		//Request Body being a naked String might be an issue for axios
 		// need to throw if map is null
 		MarketMap savedMap = this.mapRepository.findById(mapId).get();
-		savedMap.setName(newName);
+		savedMap.setName(newName.getName());
 		return this.mapRepository.save(savedMap);
 	}
 	

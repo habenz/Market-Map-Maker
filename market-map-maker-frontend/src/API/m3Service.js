@@ -41,6 +41,23 @@ class m3Service {
 			})
 	}
 
+	rename(mapId, newName) {
+		console.log(mapId, newName)
+		return axios({
+			url:`${API_URL_BASE}/map/rename/${mapId}`,
+			method: 'patch',
+			data: {name: newName}
+		})
+	}
+
+	delete(mapId){
+		console.log("deleting Map", mapId)
+		return axios({
+			url:`${API_URL_BASE}/map/remove/${mapId}`,
+			method: 'delete'
+		})	
+	}
+
 }
 
 export default new m3Service();
